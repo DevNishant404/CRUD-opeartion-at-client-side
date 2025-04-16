@@ -12,3 +12,7 @@ export function deltepost(id){
     return api.delete(`/posts/${id}`)
 }
 
+export function uploadData(post){
+    return api.post("/posts",post)
+}
+

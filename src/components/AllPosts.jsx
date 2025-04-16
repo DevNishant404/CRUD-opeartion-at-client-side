@@ -2,6 +2,7 @@ import { deltepost, getPost } from "../api/PostApi";
 import { useState, useEffect } from "react";
 import Loading from "./Loading/Loading";
 import ProductDetails from "./ProductDetails";
+import Form from "./Form";
 function AllPosts() {
   const [apidata, setApidata] = useState([]);
   const [isLoading, setisLoading] = useState(false);
@@ -49,6 +50,11 @@ function AllPosts() {
   }
 
   return (
+
+    <>
+    <section>
+      <Form apidata={apidata} setApidata={setApidata}></Form>
+    </section>
     <div className="grid lg:grid-cols-4 md:grid-cols-3  sm:grid-cols-2 grid-cols-1  gap-3 relative">
       {apidata.map((item) => {
         const { body, title, id } = item;
@@ -88,6 +94,7 @@ function AllPosts() {
         ></ProductDetails>
       ) : null}
     </div>
+    </>
   );
 }
 
