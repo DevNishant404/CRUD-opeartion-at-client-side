@@ -8,6 +8,7 @@ function AllPosts() {
   const [isLoading, setisLoading] = useState(false);
   const [openPopup, setOpenPopup] = useState(false);
   const [selectPost, setSelectPost] = useState(null);
+  const[modifyData,setModifyData]=useState({})
 
   async function getPostData() {
     setisLoading(true);
@@ -41,6 +42,14 @@ function AllPosts() {
     setOpenPopup(true);
   }
 
+  function updateData(e,item){
+
+    e.stopPropagation()
+    setModifyData(item)
+    console.log(modifyData)
+
+  }
+
   useEffect(() => {
     getPostData();
   }, []);
@@ -53,7 +62,7 @@ function AllPosts() {
 
     <>
     <section>
-      <Form apidata={apidata} setApidata={setApidata}></Form>
+      <Form apidata={apidata} modifyData={modifyData} setModifyData={setModifyData} setApidata={setApidata}></Form>
     </section>
     <div className="grid lg:grid-cols-4 md:grid-cols-3  sm:grid-cols-2 grid-cols-1  gap-3 relative">
       {apidata.map((item) => {
@@ -73,7 +82,9 @@ function AllPosts() {
             </div>
 
             <div className="flex  gap-2 items-end mt-1">
-              <button className="px-3 py-0.5 font-bold text-white tracking-tight cursor-pointer bg-gray-500 hover:opacity-90">
+              <button
+              onClick={(e)=>updateData(e,item)}
+              className="px-3 py-0.5 font-bold text-white tracking-tight cursor-pointer bg-gray-500 hover:opacity-90">
                 Edit
               </button>
               <button
